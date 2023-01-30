@@ -27,7 +27,7 @@ const Register = () => {
       toast.error(message);
     }
     if (isSuccess || user) {
-      navigate("/");
+      navigate("/home");
     }
 
     dispatch(reset());
@@ -47,7 +47,11 @@ const Register = () => {
   };
 
   if (isLoading) {
-    return <Spinner />;
+    return (
+      <div className="mt-72">
+        <Spinner />;
+      </div>
+    )
   }
 
   return (

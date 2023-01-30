@@ -26,7 +26,7 @@ const LogIn = () => {
       toast.error(message);
     }
     if (isSuccess || user) {
-      navigate("/");
+      navigate("/home");
     }
 
     dispatch(reset());

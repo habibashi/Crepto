@@ -16,7 +16,7 @@ const Home = () => {
     }, [user, navigate]);
 
     return (
-        <div className="flex bg-bodyBg">
+        <div className="bg-bodyBg">
             <SideBar />
             <Main />
         </div>
