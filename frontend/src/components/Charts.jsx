@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Line } from 'react-chartjs-2';
 import { chartsCoin } from "../features/API/fetchAPI";
-import Spinner from "../components/Spinner";
+import Spinner from "./Spinner";
 import { useParams } from 'react-router-dom';
+import Trade from "./Trade";
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -82,7 +83,10 @@ const Charts = () => {
 
     return (
         <div className="p-5">
-            <Line className="h-96" data={chartData} options={chartOptions} />
+            <div>
+                <Line className="h-96" data={chartData} options={chartOptions} />
+            </div>
+            <Trade />
         </div>
     )
 }

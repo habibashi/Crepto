@@ -1,5 +1,5 @@
-import Charts from "../pages/Charts";
-import Search from "../pages/Search";
+import Charts from "./Charts";
+import Search from "./Search";
 import NavBar from "./NavBar";
 import ShowCoins from "./ShowCoins";
 import { Outlet } from "react-router-dom";
