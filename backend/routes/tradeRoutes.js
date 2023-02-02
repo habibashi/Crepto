@@ -6,10 +6,10 @@ const {
   postSell,
   getData,
 } = require("../controllers/tradeController");
-const { route } = require("./userRoutes");
+const { protect } = require("../middleware/authMiddleware");
 
-router.post("/buy", postBuy);
-router.post("/sell", postSell);
-router.get("/data", getData);
+router.post("/buy", protect, postBuy);
+router.post("/sell", protect, postSell);
+router.get("/data", protect, getData);
 
 module.exports = router;

@@ -1,15 +1,17 @@
 import { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux'
 
 const Trade = () => {
     const [trade, setTrade] = useState({
         buy: true,
         sell: false,
     });
-
     const [amount, setAmount] = useState({
         buyAmount: "",
         sellAmount: "",
     });
+
+    const dispatch = useDispatch();
 
     const onBuyBtnHandler = () => {
         setTrade((state) => {
@@ -32,8 +34,14 @@ const Trade = () => {
         });
     };
 
+    const onSubmitHandler = (event) => {
+        event.preventDefault()
+    }
+
     return (
-        <form className="w-[45%] bg-[#101010] rounded-lg mt-10">
+        <form
+            onSubmit={onSubmitHandler}
+            className="w-[45%] bg-[#101010] rounded-lg mt-10">
             <div>
                 <div className="font-bold text-white text-xl border-b border-gray-900 text-center p-2 pt-5">
                     Make a trade

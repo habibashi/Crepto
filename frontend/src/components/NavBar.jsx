@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
 import { useSelector } from "react-redux";
@@ -19,7 +19,11 @@ const NavBar = () => {
   return (
     <nav className="bg-[#101010] p-5 flex max-lg:justify-between justify-end sticky top-0">
       <ul className="items-center gap-2 text-white hidden max-lg:flex">
-        <Link to={"/home"} className="flex gap-2 items-center text-gray-400 font hover:text-white cursor-pointer">
+        <NavLink to={"/home"} className="flex gap-2 items-center text-gray-400 font hover:text-white cursor-pointer" style={({ isActive }) => {
+          return {
+            color: isActive ? "white" : "",
+          };
+        }}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -35,8 +39,12 @@ const NavBar = () => {
             />
           </svg>
           <div className="text-sm">Home</div>
-        </Link>
-        <Link to={"/search"} className="flex gap-2 items-center text-gray-400 font hover:text-white cursor-pointer">
+        </NavLink>
+        <NavLink to={"/search"} className="flex gap-2 items-center text-gray-400 font hover:text-white cursor-pointer" style={({ isActive }) => {
+          return {
+            color: isActive ? "white" : "",
+          };
+        }}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -52,7 +60,7 @@ const NavBar = () => {
             />
           </svg>
           <div className="text-sm">Search</div>
-        </Link>
+        </NavLink>
       </ul>
       <div className="flex gap-4">
         <button id="dropdownAvatarNameButton" data-dropdown-toggle="dropdownAvatarName" className="flex items-center text-sm font-mediu rounded-full text-gray-400 font hover:text-white md:mr-0 focus:ring-gray-700" type="button">

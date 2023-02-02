@@ -11,6 +11,10 @@ const userSchema = mongoose.Schema(
       type: String,
       required: [true, "please add an email"],
     },
+    balance: {
+      type: Number,
+      default: 50000,
+    },
   },
   {
     timestamps: true,
