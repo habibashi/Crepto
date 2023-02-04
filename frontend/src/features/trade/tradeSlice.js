@@ -1,11 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import tradeService from "./tradeService";
+import { getCoin } from "../API/fetchAPI";
 
 const initialState = {
   trade: [],
   isError: false,
   isSuccess: false,
   isLoading: false,
+  isTrading: false,
   message: "",
 };
 
@@ -48,12 +50,23 @@ export const sellCoin = createAsyncThunk(
 );
 
 // get coinData
-export const getCoins = createAsyncThunk(
-  "trade/getCoins",
+export const getBuys = createAsyncThunk(
+  "trade/getBuys",
   async (_, thunkAPI) => {
     try {
-      const token = thunkAPI.getCoins().auth.user.token;
-      return await tradeService.sellCoin(token);
+      const token = thunkAPI.getState().auth.user.token;
+      const data = await tradeService.getBuysData(token);
+      let newData = await Promise.all(
+        data.map(async (item) => {
+          const coinData = await getCoin(item.coinId);
+          return {
+            ...item,
+            name: coinData.name,
+            image: coinData.image,
+          };
+        })
+      );
+      return newData;
     } catch (error) {
       const message =
         (error.response &&
@@ -75,14 +88,14 @@ export const tradeSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(buyCoin.pending, (state) => {
-        state.isLoading = true;
+        state.isTrading = true;
       })
       .addCase(buyCoin.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isTrading = false;
         state.isSuccess = true;
       })
       .addCase(buyCoin.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isTrading = false;
         state.isError = true;
         state.message = action.payload;
       })
@@ -98,15 +111,15 @@ export const tradeSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       })
-      .addCase(getCoins.pending, (state) => {
+      .addCase(getBuys.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getCoins.fulfilled, (state, action) => {
+      .addCase(getBuys.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        // state.trade = action.payload;
+        state.trade = action.payload;
       })
-      .addCase(getCoins.rejected, (state, action) => {
+      .addCase(getBuys.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

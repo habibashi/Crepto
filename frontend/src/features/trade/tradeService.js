@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "api/trade/";
+const API_URL = "/api/trade/";
 
 // buy coin
 const buyCoin = async (coinData, token) => {
@@ -29,7 +29,7 @@ const sellCoin = async (coinData, token) => {
 };
 
 // get coins
-const getCoins = async (token) => {
+const getBuysData = async (token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -43,7 +43,7 @@ const getCoins = async (token) => {
 const tradeService = {
   buyCoin,
   sellCoin,
-  getCoins,
+  getBuysData,
 };
 
 export default tradeService;

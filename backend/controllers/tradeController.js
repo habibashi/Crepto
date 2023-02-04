@@ -1,6 +1,5 @@
 const asyncHandler = require("express-async-handler");
 const Trade = require("../models/tradeModel");
-const User = require("../models/userModel");
 
 // @desc Post buy
 // @route POST /api/trade/buy
@@ -36,7 +35,7 @@ const postBuy = asyncHandler(async (req, res) => {
     });
     res.status(200).json(neww);
   }
-  req.user.balance = req.user.balance - total;
+  req.user.balance = parseFloat(req.user.balance) - total;
   await req.user.save();
 });
 
@@ -68,7 +67,7 @@ const postSell = asyncHandler(async (req, res) => {
   if (exist.amount === 0) {
     await Trade.deleteOne({ coinId, userId: req.user.id });
   }
-  req.user.balance = req.user.balance + total;
+  req.user.balance = parseFloat(req.user.balance) + total;
   await req.user.save();
 });
 

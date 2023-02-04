@@ -40,6 +40,7 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(200).json({
       id: user._id,
       username: user.username,
+      balance: user.balance,
       token: generateToken(user._id),
     });
   } else {
@@ -62,6 +63,7 @@ const loginUser = asyncHandler(async (req, res) => {
     res.json({
       id: user._id,
       username: user.username,
+      balance: user.balance,
       token: generateToken(user._id),
     });
   } else {
