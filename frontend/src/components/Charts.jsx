@@ -52,21 +52,21 @@ const Charts = () => {
     }, [params.id]);
 
 
-    // const days = [];
-    // const today = new Date();
+    const days = [];
+    const today = new Date();
 
-    // for (let i = 0; i < 7; i++) {
-    //     const day = new Date(today);
-    //     day.setDate(today.getDate() - i);
-    //     days.unshift(day.toLocaleDateString("en-US", { month: "short", day: "numeric" }));
-    // }
+    for (let i = 0; i < 7; i++) {
+        const day = new Date(today);
+        day.setDate(today.getDate() - i);
+        days.unshift(day.toLocaleDateString("en-US", { month: "short", day: "numeric" }));
+    }
 
     useEffect(() => {
         const chartCoinsData = async () => {
             try {
                 const data = await chartsCoin(params.id);
                 setChartData({
-                    labels: [0, 1, 2, 3, 4, 5, 6, 7],
+                    labels: days.map(dayy => dayy),
                     datasets: [
                         {
                             label: params.id,
@@ -82,7 +82,7 @@ const Charts = () => {
             }
         }
         chartCoinsData();
-    }, [params.id]);
+    }, [params.id, days]);
 
     if (error) {
         return <div className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" role="alert">
