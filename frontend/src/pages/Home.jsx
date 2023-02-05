@@ -3,24 +3,24 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Main from "../components/Main";
 import SideBar from "../components/SideBar";
-import "react-toastify/dist/ReactToastify.css"
+import "react-toastify/dist/ReactToastify.css";
 
 const Home = () => {
-    const navigate = useNavigate();
-    const { user } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
 
-    useEffect(() => {
-        if (!user) {
-            navigate('/login');
-        }
-    }, [user, navigate]);
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user, navigate]);
 
-    return (
-        <div className="bg-bodyBg">
-            <SideBar />
-            <Main />
-        </div>
-    );
+  return (
+    <div className="bg-bodyBg">
+      <SideBar />
+      <Main />
+    </div>
+  );
 };
 
 export default Home;
