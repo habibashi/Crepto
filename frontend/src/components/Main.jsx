@@ -1,4 +1,3 @@
-import Charts from "./Charts";
 import NavBar from "./NavBar";
 import { Outlet } from "react-router-dom";
 
