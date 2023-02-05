@@ -22,7 +22,7 @@ const ShowTable = () => {
         setError("API error");
       }
       setIsLoading(false);
-    }
+    };
     getCoinsData();
   }, []);
 
@@ -31,24 +31,28 @@ const ShowTable = () => {
       <div className="mt-36">
         <Spinner />
       </div>
-    )
+    );
   }
 
   if (error) {
-    return <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" role="alert">
-      <p class="font-bold">{error}</p>
-      <p>Something not ideal might be happening.</p>
-    </div>
+    return (
+      <div
+        class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4"
+        role="alert"
+      >
+        <p class="font-bold">{error}</p>
+        <p>Something not ideal might be happening.</p>
+      </div>
+    );
   }
 
   // get current posts
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = coins.slice(indexOfFirstPost, indexOfLastPost)
+  const currentPosts = coins.slice(indexOfFirstPost, indexOfLastPost);
 
-  // change page 
-  const paginate = pageNumber => setCurrentPage(pageNumber)
-
+  // change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <>
@@ -81,7 +85,11 @@ const ShowTable = () => {
           </thead>
           <tbody>
             {currentPosts.map((coin) => (
-              <tr key={coin.id} onClick={() => navigate(`/chart/${coin.id}`)} className="light:bg-white light:border-b bg-SideBarColor border-gray-700 cursor-pointer">
+              <tr
+                key={coin.id}
+                onClick={() => navigate(`/chart/${coin.id}`)}
+                className="light:bg-white light:border-b bg-SideBarColor border-gray-700 cursor-pointer"
+              >
                 <th
                   scope="row"
                   className="pl-6 py-4 font-medium light:text-gray-900 whitespace-nowrap text-white"
@@ -93,7 +101,11 @@ const ShowTable = () => {
                   className="pr-6 py-4 font-medium light:text-gray-900 whitespace-nowrap text-white"
                 >
                   <div className="flex items-center">
-                    <img className="w-6 h-6" src={coin.image} alt={coin.image} />
+                    <img
+                      className="w-6 h-6"
+                      src={coin.image}
+                      alt={coin.image}
+                    />
                     <p className="ml-2">{coin.name}</p>
                   </div>
                 </th>
@@ -146,7 +158,11 @@ const ShowTable = () => {
           </tbody>
         </table>
       </div>
-      <Pagination postsPerPage={postsPerPage} totalPosts={coins.length} paginate={paginate} />
+      <Pagination
+        postsPerPage={postsPerPage}
+        totalPosts={coins.length}
+        paginate={paginate}
+      />
     </>
   );
 };
